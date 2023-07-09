@@ -4,11 +4,11 @@ const path = './products.json'
 
 function leer(){
     let rawdata = fs.readFileSync(path)
-    let pets = JSON.parse(rawdata)
-    return pets;
+    let productos = JSON.parse(rawdata)
+    return productos;
 }
-function escibir(listaLibros){
-    let data = JSON.stringify(listaLibros)
+function escibir(productos){
+    let data = JSON.stringify(productos)
     console.log(`data: ${data}`)
     fs.writeFile(path,data,'utf-8',(err)=>{
         if (err) throw err
