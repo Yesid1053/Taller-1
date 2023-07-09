@@ -1,0 +1,40 @@
+[
+    {
+      "id": 1,
+      "name": "Balon adidas",
+      "category": "Fútbol",
+      "price": 19.99,
+      "image": "https://www.nicepng.com/png/detail/238-2386204_adidas-explica-cmo-elabora-el-baln-con-que.png"
+    },
+    {
+      "id": 2,
+      "name": "Balon baloncesto",
+      "category": "Baloncesto",
+      "price": 49.99,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_947601-MLU69693321124_052023-O.webp"
+    },
+    {
+      "id": 3,
+      "name": "Guantes de boxeo",
+      "category": "Boxeo",
+      "price": 39.99,
+      "image": "https://sportfitness.co/cdn/shop/products/guante-boxeo-pro-14oz-sportfitness_1080x.jpg?v=1612557554"
+    },
+    {
+      "id": 4,
+      "name": "Eliptica",
+      "category": "Maquinas",
+      "price": 14.99,
+      "image": "https://sportfitness.co/cdn/shop/products/070286-5_360x.png?v=1657298463"
+    },
+    {
+        "id": 5,
+        "name": "Buso",
+        "category": "Ropa",
+        "price": 14.99,
+        "image": "https://peopleplays.vteximg.com.br/arquivos/ids/373655-520-520/GK9540_1.jpg?v=638044967326730000"
+
+
+    }
+  ]
+  
