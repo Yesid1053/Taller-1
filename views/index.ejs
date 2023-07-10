@@ -68,6 +68,11 @@
                                                 <label for="img Url">Img URL</label>
                                                 <input type="text" class="form-control" name="image" id="img" required>
                                             </div>
+                                            <div class="form-group">
+                                                <label for="stock">Stock</label>
+                                                <input type="number" class="form-control" name="stock"
+                                                    id="stock" required>
+                                            </div>
                                             <button type="submit" class="btn btn-primary mt-3">Registrar</button>
                                         </form>
                                     </div>
@@ -87,22 +92,26 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="categoria">Categoría</label>
-                                        <select id="categoryfiltro" class="form-select" name="categoryfiltro" required
-                                            onchange=filtrarProductos()>
+                                        <select id="categoryfiltro" class="form-select" name="categoryfiltro" required onchange=filtrarProductos()>
                                             <option value="">Seleccione categoría</option>
                                             <% categorias.forEach(categoria=> { %>
-                                                <option value="<%= categoria %>">
-                                                    <%= categoria %>
-                                                </option>
-                                                <% }) %>
+                                            <option value="<%= categoria %>"><%= categoria %></option>
+                                            <% }) %>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="form-group">
-                                        <label for="preciofiltro">Precio</label>
-                                        <input type="number" class="form-control" id="filtroPrecio" name="filtroPrecio"
-                                            onkeyup=filtrarProductos() placeholder="Filtrar por precio">
+                                        <label for="preciofiltro">Precio (Min)</label>
+                                        <input type="number" class="form-control" id="filtroPrecio" name="filtroPrecio" onkeyup=filtrarProductos()
+                                            placeholder="Min">
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label for="preciofiltro">Precio (Max)</label>
+                                        <input type="number" class="form-control" id="filtroPrecioMax" name="filtroPrecioMax"
+                                            onkeyup=filtrarProductos() placeholder="Max">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
@@ -112,15 +121,15 @@
                                             onkeyup=filtrarProductos() placeholder="Buscar por nombre">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <div class="form-group">
                                         <label>&nbsp;</label>
-                                        <button type="button" class="btn btn-secondary form-control"
-                                            onclick="limpiarFiltros()">Limpiar</button>
+                                        <button type="button" class="btn btn-secondary form-control" onclick="limpiarFiltros()">Limpiar</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        
 
                         <!-- finaliza filtro de busqueda por categoria, precio y nombre                      -->
 
@@ -143,6 +152,9 @@
                                                 </p>
                                                 <p class="card-text"><span class="caret">Precio: </span>
                                                     <%= producto.price %>
+                                                </p>
+                                                <p class="card-text"><span class="caret">Stock: </span>
+                                                    <%= producto.stock %>
                                                 </p>
                                                 <div class="text-end">
                                                     <button class="btn btn-primary btn-block" data-bs-toggle="modal"
@@ -200,6 +212,11 @@
                                                             <input type="text" class="form-control" name="image"
                                                                 id="image" value="<%= producto.image %>" required>
                                                         </div>
+                                                        <div class="form-group">
+                                                            <label for="stock">Stock</label>
+                                                            <input type="number" class="form-control" name="stock"
+                                                                id="stock" value="<%= producto.stock %>" required>
+                                                        </div>
                                                         <button type="submit" class="btn btn-primary mt-3">Guardar
                                                             cambios</button>
                                                     </form>
@@ -234,6 +251,8 @@
                 var categoria = document.getElementById("categoryfiltro").value;
                 var precio = document.getElementById("filtroPrecio").value;
                 var nombre = document.getElementById("filtroNombre").value;
+                var precioMax = document.getElementById("filtroPrecioMax").value;
+                console.log(`preciomax: ${precioMax}`)
 
 
                 if (nombre != "") {
@@ -273,7 +292,7 @@
                     }
                 }
 
-                if(precio != ""){
+                if(precio != "" && precioMax != ""){
                     console.log("precio no vacio")
                     var productosfiltro = document.getElementsByClassName("card");
                     console.log(`productos: ${productosfiltro}`)
@@ -281,7 +300,8 @@
                         var precioProducto = productosfiltro[i].getElementsByClassName("card-text")[1].innerHTML;
                         var precioCadaProducto = parseFloat(precioProducto.match(/\d+\.\d+/)[0]);
                         console.log(`es mayor el precio del producto ${precioCadaProducto} que el precio del filtro ${precio}`)
-                        if (precioCadaProducto>=precio ) {
+                        console.log(`es menor el precio del producto ${precioCadaProducto} que el precio del filtro ${precioMax}`)
+                        if (precioCadaProducto <= precioMax  && precioCadaProducto >= precio) {
                             
                             productosfiltro[i].style.display = "block";
 
@@ -301,6 +321,7 @@
                 document.getElementById("categoryfiltro").value = "";
                 document.getElementById("filtroPrecio").value = "";
                 document.getElementById("filtroNombre").value = "";
+                document.getElementById("filtroPrecioMax").value = "";
 
                 var productos = document.getElementsByClassName("card");
                 for (let i = 0; i < productos.length; i++) {

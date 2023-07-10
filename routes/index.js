@@ -17,11 +17,11 @@ router.get('/', (req, res) => {
     });
 });
 router.post('/registrar', (req, res) => {
-    const { name, category, price, image } = req.body;
+    const { name, category, price, image, stock } = req.body;
     const data = req.body;
     console.log(data)
     const id = productos.length + 1;
-    productos.push({ id, name, category, price, image });
+    productos.push({ id, name, category, price, image, stock });
     alert = "Producto registrado"
     control.escibir(productos);
     res.redirect('/');
@@ -30,7 +30,7 @@ router.post('/registrar', (req, res) => {
 router.post('/modificar', (req, res) => {
 
 
-    const { id, name, category, price, image } = req.body;
+    const { id, name, category, price, image, stock } = req.body;
 
     const data = req.body;
     console.log(data)
@@ -41,6 +41,7 @@ router.post('/modificar', (req, res) => {
             producto.category = category;
             producto.price = price;
             producto.image = image;
+            producto.stock = stock;
         }
     });
 
@@ -52,9 +53,6 @@ router.post('/modificar', (req, res) => {
 router.get('/delete/:id', (req, res) => {
     const id = req.params.id;
     console.log(id)
-    // listaLibros = listaLibros.filter(libro => libro.id != id);
-    // control.escibir(listaLibros);
-
     productos = productos.filter(producto => producto.id != id);
     control.escibir(productos);
     alert = "Producto eliminado"
